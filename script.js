@@ -1,51 +1,64 @@
 console.log("Hello World");
 
-const possibleChoises = ['rock', 'paper', 'scissors'];
-//so we and the computer can use it 
+const possibleChoices = ['rock', 'paper', 'scissors'];
 
-const getComputerChoice = (arr = 3) =>{
-    //return Math.floor(Math.random() * arr);
-    const theRandomComputerChoice = Math.floor(Math.random() * arr);
+const getComputerChoice = () => {
+    const index = Math.floor(Math.random() * possibleChoices.length);
+    return possibleChoices[index];
+};
 
-    if(theRandomComputerChoice == 0){
-        return possibleChoises[0];
-    }else if(theRandomComputerChoice == 1){
-        return possibleChoises[1];
-    }else if(theRandomComputerChoice == 2){
-        return possibleChoises[2];
-    } else {
-        //no nuber can possibly be lonhge but we just use it in case
-        //we can also remove it and add the last if else as the normal 
-        //last else
-        console.log("Error: the array length is less than 3");
-        return null;
-    }
-}   
-
-const getUserChoice = (input = 0) => {
-
-    //here we need no random number generator as the user will make
-    //the choise
+const getUserChoice = () => {
     console.log("0. for rock");
     console.log("1. for paper");
     console.log("2. for scissors");
 
-    const userMove = parseInt(prompt("please enter a value"));
-    
-    if(userMove == 0){
-        return possibleChoises[0];
-    }else if(userMove == 1){
-        return possibleChoises[1];3
-    }else if(userMove == 2){
-        return possibleChoises[2];
+    const userMove = parseInt(prompt("Please enter a value"), 10);
+    if (userMove >= 0 && userMove < possibleChoices.length) {
+        return possibleChoices[userMove];
     } else {
-        //here the else does make more sense because the user can input what ever number he whants
-        console.log("Error: the array length is less than 3");
+        console.log("Error: Invalid choice. Please enter 0, 1, or 2.");
         return null;
+    }
+};
+
+let computerScore = 0;
+let humanScore = 0;
+
+function whoWon(pc, user) {
+    if (pc === user) {
+        console.log("Tie");
+    } else if (
+        (pc === 'rock' && user === 'scissors') ||
+        (pc === 'scissors' && user === 'paper') ||
+        (pc === 'paper' && user === 'rock')
+    ) {
+        console.log("Computer won");
+        computerScore++;
+    } else {
+        console.log("User won");
+        humanScore++;
     }
 }
 
-//to set the score
-let userScore = 0;
-let computerScore = 0;
+const playGame = () => {
+    for (let i = 0; i < 5; i++) {
+        const userChoice = getUserChoice();
+        const computerChoice = getComputerChoice();
 
+        if (userChoice && computerChoice) {
+            whoWon(computerChoice, userChoice);
+            console.log(`Round ${i + 1}:`);
+            console.log(`Computer chose: ${computerChoice}`);
+            console.log(`User chose: ${userChoice}`);
+            console.log(`Scores - Computer: ${computerScore}, User: ${humanScore}`);
+        } else {
+            console.log(`Invalid choices. Round ${i + 1} skipped.`);
+        }
+    }
+
+    console.log(`Final Scores - Computer: ${computerScore}, User: ${humanScore}`);
+    console.log(`Total Score: Computer ${computerScore} / 5, User ${humanScore} / 5`);
+};
+
+// Call the playGame function to start the game
+playGame();

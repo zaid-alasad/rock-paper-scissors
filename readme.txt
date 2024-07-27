@@ -7,3 +7,20 @@ alot of ideas can be included in the idea for further versions
 2. write the code
 3. test your code to make sure it works
 
+    we might need this function late ron in this subject as we may change some stuff
+    well keep it here for refrence
+
+function theLogic(pc, user){
+    
+    if(pc == user){
+        computerScore++;
+        humanScore++;
+        return "It's a tie!";
+    } else if((pc == 'rock' && user =='scissors') || (pc =='scissors' && user == 'paper') || (pc == 'paper' && user == 'rock')){
+        computerScore++;
+        return "Computer wins!";
+    } else {
+        humanScore++;
+        return "User wins!";
+    }
+}
