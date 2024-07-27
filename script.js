@@ -22,8 +22,30 @@ const getComputerChoice = (arr = 3) =>{
     }
 }   
 
+const getUserChoice = (input = 0) => {
 
+    //here we need no random number generator as the user will make
+    //the choise
+    console.log("0. for rock");
+    console.log("1. for paper");
+    console.log("2. for scissors");
 
-//console.log(getComputerChoice());
-//testing pepose plus max value will be 2 as the default
-//para value is set to 3
+    const userMove = parseInt(prompt("please enter a value"));
+    
+    if(userMove == 0){
+        return possibleChoises[0];
+    }else if(userMove == 1){
+        return possibleChoises[1];3
+    }else if(userMove == 2){
+        return possibleChoises[2];
+    } else {
+        //here the else does make more sense because the user can input what ever number he whants
+        console.log("Error: the array length is less than 3");
+        return null;
+    }
+}
+
+//to set the score
+let userScore = 0;
+let computerScore = 0;
+
